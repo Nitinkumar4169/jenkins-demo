@@ -1,19 +1,18 @@
 pipeline {
-
     agent any
 
     stages {
 
-        stage('Run App') {
-
+        stage('Install Dependencies') {
             steps {
-
-                sh 'python3 app.py'
-
+                sh 'pip3 install -r requirements.txt || true'
             }
-
         }
 
+        stage('Run App') {
+            steps {
+                sh 'python3 app.py'
+            }
+        }
     }
-
 }
