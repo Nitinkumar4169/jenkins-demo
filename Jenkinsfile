@@ -2,16 +2,15 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Install Dependencies') {
+        stage('Checkout') {
             steps {
-                sh 'pip3 install -r requirements.txt || true'
+                checkout scm
             }
         }
 
-        stage('Run App') {
+        stage('Build Docker Image') {
             steps {
-                sh 'python3 app.py'
+                sh 'docker build -t jenkins-demo:v1 .'
             }
         }
     }
