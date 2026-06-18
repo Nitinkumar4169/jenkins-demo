@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.12-slim'
+        }
+    }
 
     stages {
 
@@ -9,15 +13,9 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Run App') {
             steps {
-                sh 'docker build -t jenkins-demo:v1 .'
-            }
-        }
-
-        stage('Run Container') {
-            steps {
-                sh 'docker run --rm jenkins-demo:v1'
+                sh 'python app.py'
             }
         }
     }
