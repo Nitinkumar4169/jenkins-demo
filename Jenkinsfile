@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.12-alpine'
+        }
+    }
 
     stages {
 
@@ -9,9 +13,9 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Run App') {
             steps {
-                sh 'echo "Pipeline working"'
+                sh 'python app.py'
             }
         }
     }
